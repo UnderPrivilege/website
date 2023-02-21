@@ -54,6 +54,16 @@ article a:hover {
     text-decoration: none
 }
 
+.art {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(60% + 40px); /* 40px added to account for padding/margin */
+    margin: 0 auto;
+    max-width: 1000px; /* Adjust as needed */
+  }
+
 footer {
     background-color: #000000; /* black */
     color: #ffffff; /* white */
