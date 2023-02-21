@@ -24,9 +24,10 @@ header h1 {
 }
 
 main {
-    margin: 20px;
     flex: 1;
-}
+    padding: 20px;
+    text-align: justify;
+  }
 
 article {
     background-color: #ffffff; /* white */
