@@ -41,6 +41,18 @@ article h2 {
     margin-top: 0;
 }
 
+article h2::before {
+    content: "~ ";
+}
+  
+article h2::first-letter {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    color: red;
+    text-shadow: 1px 1px 0 #000;
+}
+
 article p {
     margin-bottom: 10px;
 }
