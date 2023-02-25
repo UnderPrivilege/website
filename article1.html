@@ -8,8 +8,8 @@
 
   <h1>Reversing the new microsoft bing waitlist installer</h1>
   <p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href='https://www.bing.com/new'>bing</a>.</p>
-  <p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, this requires downloading <em>MicrosoftDefaults.exe.</em></p>
-  <p>Since this app is Microsoft-made, I decided to take a look inside the binary.</p>
+  <p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, however it requires downloading <em>MicrosoftDefaults.exe.</em></p>
+  <p>Since this app is from Microsoft, I decided to reverse it and check what is actually being made.</p>
   <h2>#1: wextract</h2>
   <p>The first thing we can see is that the app is actually using <code>wextract.exe</code> functionality, which is used to unpack <code>.cab</code> files. </p>
   <p>Furthermore, a resource entry named <em>CABINET</em> <em>is</em> stored in the <code>.rsrc</code> section of the PE file, it actually corresponds to the .cab file to extract, confirmed by it&#39;s <em>MSCF</em>  (<strong>M</strong>icro<strong>S</strong>oft <strong>C</strong>ab <strong>F</strong>ile)  signature.</p>
