@@ -1,4 +1,10 @@
-<html><head></head><body><p><a href="dethr0ned.cloud">&lt; back</a></p>
+<html><meta charset="UTF-8">
+<title>Reversing Bing</title>
+<link rel="icon" href="./assets/favicon.png" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles/style2.css"><head></head><body><p><a href="dethr0ned.cloud">&lt; back</a></p>
 
   <h1>Reversing the new microsoft bing waitlist installer</h1>
   
@@ -18,9 +24,7 @@
   <p><em>FDICopy</em> is then called with *<em>MEMCAB </em>as the name of the cabinet file, which presumably uses memory contents as input, to extract the cabinet file to the temp directory <em>%LocalAppData%/Temp/IXP00?.TMP &nbsp;</em>where ? changes at each extraction.</p>
   
   <p>Taking a look at the directory, we can observe the following file structure:</p>
-  
-  <figure><img src="https://snipboard.io/CWLTxS.jpg"><figcaption>Figure 1: Directory Structure</figcaption></figure>
-  
+  <figure><img src="https://snipboard.io/CWLTxS.jpg"><figcaption>Figure 1: Directory Structure</figcaption></figure>  
   <p>Looking back at the code, the registry key <em>Software\Microsoft\Windows\CurrentVersion\RunOnce has </em>&nbsp;<em>StartupInstaller.exe </em>added to it.&nbsp;</p>
   
   <p>This key is used so that <em>SetupInstaller.exe</em> runs once at the next user log in.&nbsp;</p>
