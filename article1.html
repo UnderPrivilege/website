@@ -10,12 +10,12 @@
 
 <p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href="https://www.bing.com/new">bing</a>.</p>
 
-<p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, this requires downloading <em>MicrosoftDefaults.exe.</em></p>
+<p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, this requires downloading <code>MicrosoftDefaults.exe.</code></p>
 
 <p>Since this app is Microsoft-made, I decided to take a look inside the binary.</p>
 
 <h2>#1: wextract</h2>
-<p>The first thing we can see, is that the app is actually using <em>wextract.exe, </em>which is used to unpack <em>.cab</em> files.&nbsp;</p>
+<p>The first thing we can see, is that the app is actually using <code>wextract.exe</code>, which is used to unpack <code>.cab</code> files.&nbsp;</p>
 
 <p>Furthermore, a resource entry named <em>CABINET is </em>stored in the <em>.rsrc </em>section of the PE file, it actually corresponds to the .cab file to extract, confirmed by it's <em>MSCF </em>&nbsp;(<strong>M</strong>icro<strong>S</strong>oft <strong>C</strong>ab <strong>F</strong>ile) &nbsp;signature.</p>
 
