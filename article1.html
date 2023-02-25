@@ -8,18 +8,19 @@
 
   <h1>Reversing the new microsoft bing waitlist installer</h1>
   <p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href='https://www.bing.com/new'>bing</a>.</p>
-  <p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, however it requires downloading <em>MicrosoftDefaults.exe.</em></p>
+  <p>To gain access to this new version, you must join a waitlist. You also get an option for faster access, however it requires downloading <em>MicrosoftDefaults.exe</em>.</p>
   <p>Since this app is from Microsoft, I decided to reverse it and check what is actually being made.</p>
   <h2>#1: wextract</h2>
   <p>The first thing we can see is that the app is actually using <code>wextract.exe</code> functionality, which is used to unpack <code>.cab</code> files. </p>
-  <p>Furthermore, a resource entry named <em>CABINET</em> <em>is</em> stored in the <code>.rsrc</code> section of the PE file, it actually corresponds to the .cab file to extract, confirmed by it&#39;s <em>MSCF</em>  (<strong>M</strong>icro<strong>S</strong>oft <strong>C</strong>ab <strong>F</strong>ile)  signature.</p>
+  <p>Indeed, a resource entry named <a href=''>CABINET</a> <em>is</em> stored in the <code>.rsrc</code> section of the PE file corresponding to the .cab file to extract, confirmed by it&#39;s MSCF<sup class='md-footnote'><a href='#dfref-footnote-1' name='ref-footnote-1'>1</a></sup> signature.</p>
   <p>The functions <code>FindResourceA</code> , <code>LoadResource</code> and <code>LockResource</code> are then called to get a pointer to the resource in memory.</p>
   <p><code>FDICopy</code> is then called with <code>*MEMCAB</code> as the name of the cabinet file, which presumably uses memory contents as input, to extract the cabinet file to the temp directory <code>%LocalAppData%/Temp/IXP00?.TMP</code>  where <code>?</code> increases at each extraction.</p>
   <p>Inside this temp directory, we observe the following structure</p>
-  <figure><img src="https://snipboard.io/CWLTxS.jpg" referrerpolicy="no-referrer"><figcaption>Figure 1: Directory Structure</figcaption></figure>
-  <p>Next, <em>StartupInstaller.exe</em> is added to the registry key <code>Software\Microsoft\Windows\CurrentVersion\RunOnce</code> which makes the program run once at the log in. </p>
-  <p>Finally, after extraction, a process is created with the <em>StartupInstaller.exe</em> module.</p>
+  <figure><img src="https://snipboard.io/CWLTxS.jpg" referrerpolicy="no-referrer" alt="Figure 1: Directory Structure"><figcaption>Figure 1: Directory Structure</figcaption></figure>
+  <p>Next, <em>StartupInstaller.exe</em> is added to the registry key <code>Software\Microsoft\Windows\CurrentVersion\RunOnce</code> which makes the program run once at the log in.</p>
+  <p>Finally, after extraction, a new process is created with the <em>StartupInstaller.exe</em> module.</p>
   <h2>#2: StartupInstaller</h2>
   
+  <div class='footnote-line'><span class='md-fn-count'>1</span> Microsoft Cab File <a name='dfref-footnote-1' href='#ref-footnote-1' title='back to document' class='reversefootnote' >↩</a></div>
 
 </html>
