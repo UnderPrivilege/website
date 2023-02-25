@@ -49,23 +49,14 @@ main h2::first-letter {
     text-shadow: 1px 1px 0 #000;
 }
 
-.image-with-caption {
-display: block;
-position: relative;
+figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.image-with-caption::after {
-content: attr(alt);
-position: absolute;
-bottom: 0;
-left: 50%;
-transform: translateX(-50%);
+  
+figcaption {
 text-align: center;
-background-color: rgba(0, 0, 0, 0.8);
-color: #fff;
-padding: 10px;
-font-size: 14px;
-white-space: nowrap;
 }
   
   
