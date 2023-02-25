@@ -50,20 +50,22 @@ main h2::first-letter {
 }
 
 .image-with-caption {
-    position: relative;
+display: block;
+position: relative;
 }
-  
+
 .image-with-caption::after {
 content: attr(alt);
 position: absolute;
 bottom: 0;
-left: 0;
-right: 0;
+left: 50%;
+transform: translateX(-50%);
 text-align: center;
 background-color: rgba(0, 0, 0, 0.8);
 color: #fff;
 padding: 10px;
 font-size: 14px;
+white-space: nowrap;
 }
   
   
