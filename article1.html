@@ -6,31 +6,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles/style2.css"><head></head><body><p><a href="https://dethr0ned.cloud">&lt; back</a></p>
 
-<h1>Reversing the new microsoft bing waitlist installer</h1>
-
-<p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href="https://www.bing.com/new">bing</a>.</p>
-
-<p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, this requires downloading <code>MicrosoftDefaults.exe.</code></p>
-
-<p>Since this app is Microsoft-made, I decided to take a look inside the binary.</p>
-
-<h2>#1: wextract</h2>
-<p>The first thing we can see, is that the app is actually using <code>wextract.exe</code>, which is used to unpack <code>.cab</code> files.&nbsp;</p>
-
-<p>Furthermore, a resource entry named <em>CABINET is </em>stored in the <em>.rsrc </em>section of the PE file, it actually corresponds to the .cab file to extract, confirmed by it's <em>MSCF </em>&nbsp;(<strong>M</strong>icro<strong>S</strong>oft <strong>C</strong>ab <strong>F</strong>ile) &nbsp;signature.</p>
-
-<p>The functions <em>FindResourceA,</em> <em>LoadResource </em>and <em>LockResource are then called </em>to get a pointer to the resource in memory.</p>
-
-<p><em>FDICopy</em> is then called with *<em>MEMCAB </em>as the name of the cabinet file, which presumably uses memory contents as input, to extract the cabinet file to the temp directory <em>%LocalAppData%/Temp/IXP00?.TMP &nbsp;</em>where ? changes at each extraction.</p>
-
-<p>Taking a look at the directory, we can observe the following file structure:</p>
-<figure><img src="https://snipboard.io/CWLTxS.jpg"><figcaption>Figure 1: Directory Structure</figcaption></figure>  
-<p>Looking back at the code, the registry key <em>Software\Microsoft\Windows\CurrentVersion\RunOnce has </em>&nbsp;<em>StartupInstaller.exe </em>added to it.&nbsp;</p>
-
-<p>This key is used so that <em>SetupInstaller.exe</em> runs once at the next user log in.&nbsp;</p>
-
-<p>Finally, after extraction, a process is created with the <em>StartupInstaller.exe </em>module.</p>
-
-<h2>#2: StartupInstaller</h2></body>
+  <h1>Reversing the new microsoft bing waitlist installer</h1>
+  <p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href='https://www.bing.com/new'>bing</a>.</p>
+  <p>To gain access to the new features, you must join a waitlist. You also get an option for faster access, this requires downloading <em>MicrosoftDefaults.exe.</em></p>
+  <p>Since this app is Microsoft-made, I decided to take a look inside the binary.</p>
+  <h2>#1: wextract</h2>
+  <p>The first thing we can see is that the app is actually using <code>wextract.exe</code> functionality, which is used to unpack <code>.cab</code> files. </p>
+  <p>Furthermore, a resource entry named <em>CABINET</em> <em>is</em> stored in the <code>.rsrc</code> section of the PE file, it actually corresponds to the .cab file to extract, confirmed by it&#39;s <em>MSCF</em>  (<strong>M</strong>icro<strong>S</strong>oft <strong>C</strong>ab <strong>F</strong>ile)  signature.</p>
+  <p>The functions <code>FindResourceA</code> , <code>LoadResource</code> and <code>LockResource</code> are then called to get a pointer to the resource in memory.</p>
+  <p><code>FDICopy</code> is then called with <code>*MEMCAB</code> as the name of the cabinet file, which presumably uses memory contents as input, to extract the cabinet file to the temp directory <code>%LocalAppData%/Temp/IXP00?.TMP</code>  where <code>?</code> increases at each extraction.</p>
+  <p>Inside this temp directory, we observe the following structure</p>
+  <p><img src="https://snipboard.io/CWLTxS.jpg" referrerpolicy="no-referrer" alt="Figure 1: Directory Structure"></p>
+  <p>Looking back at the code, the registry key <em>Software\Microsoft\Windows\CurrentVersion\RunOnce has</em>  <em>StartupInstaller.exe</em> added which makes the program run once at the log in. </p>
+  <p>Finally, after extraction, a process is created with the <em>StartupInstaller.exe</em> module.</p>
+  <h2>#2: StartupInstaller</h2>
+  
 
 </html>
