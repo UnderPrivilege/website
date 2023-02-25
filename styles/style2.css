@@ -49,6 +49,25 @@ main h2::first-letter {
     text-shadow: 1px 1px 0 #000;
 }
 
+.image-with-caption {
+    position: relative;
+}
+  
+.image-with-caption::after {
+content: attr(alt);
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+text-align: center;
+background-color: rgba(0, 0, 0, 0.8);
+color: #fff;
+padding: 10px;
+font-size: 14px;
+}
+  
+  
+
 footer {
     background-color: #000000; /* black */
     color: #ffffff; /* white */
