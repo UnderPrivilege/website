@@ -9,7 +9,7 @@
   <h1>Reversing the new microsoft bing waitlist installer</h1>
   <p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href='https://www.bing.com/new'>bing</a>.</p>
   <p>To gain access to this new version, you must join a waitlist. What's interesting is that you also get an option for faster access which requires you to download <em>MicrosoftDefaults.exe</em>.</p>
-  <p>This intrigued me, so I decided to take a look at the executable</p>
+  <p>This intrigued me, so I decided to take a look at the executable.</p>
   <h2>#1: wextract</h2>
   <p>The first thing we can see is that the executable actually corresponds to the <code>wextract.exe</code> module, which is used to unpack .cab(Cabinet) files. </p>
   <p>Indeed, a resource entry named <code>CABINET</code> is stored in the <code>.rsrc</code> section of the PE file corresponding to the .cab file to extract, confirmed by it&#39;s MSCF<sup class='md-footnote'><a href='#dfref-footnote-1' name='ref-footnote-1'>1</a></sup> signature.</p>
@@ -19,8 +19,12 @@
   <figure><img src="https://snipboard.io/CWLTxS.jpg" referrerpolicy="no-referrer" alt="Figure 1: Directory Structure"><figcaption>Figure 1: Directory Structure</figcaption></figure>
   <p>Next, <em>StartupInstaller.exe</em> is added to the registry key <code>Software\Microsoft\Windows\CurrentVersion\RunOnce</code> which makes the program run once at the log in.</p>
   <p>In the end, a new process is created, running the <em>StartupInstaller.exe</em> module.</p>
-  <h2>#2: StartupInstaller</h2>
-  
+  <h2>#2: Startup Installer</h2>
+<p>This process will use the registry to check whether you have the version 4.6 or higher for the .Net framework.</p>
+<p>If you have the right version, a new process is created running the <code>UniversalInstaller.exe</code> module. </p>
+<h2>#3: Universal Installer</h2>
+<p>This app is actually a .NET file, tools such as <em>dnSpy</em> can be used for the analysis.</p>
+
   <div class='footnote-line'><span class='md-fn-count'>1.</span> Microsoft Cab File <a name='dfref-footnote-1' href='#ref-footnote-1' title='back to document' class='reversefootnote' >↩</a></div>
 
 </html>
