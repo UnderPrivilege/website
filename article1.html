@@ -1,6 +1,6 @@
 <html><meta charset="UTF-8">
 <title>Reversing Bing</title>
-<link rel="icon" href="./assets/favicon.png" type="image/x-icon">
+<link rel="icon" href="./assets/cloud.png" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
@@ -9,9 +9,9 @@
   <h1>Reversing the new microsoft bing waitlist installer</h1>
   <p>With the recent race for AI-assisted search engines, I decided to take a look at the new <a href='https://www.bing.com/new'>bing</a>.</p>
   <p>To gain access to this new version, you must join a waitlist. What's interesting is that you also get an option for faster access which requires you to download <em>MicrosoftDefaults.exe</em>.</p>
-  <p>I was intrigued so I decided to analyze the executable.</p>
+  <p>This intrigued me, so I decided to take a look at the executable</p>
   <h2>#1: wextract</h2>
-  <p>The first thing we can see is that the executable actually corresponds to the <code>wextract.exe</code> module, which is used to unpack <code>.cab</code>(Cabinet) files. </p>
+  <p>The first thing we can see is that the executable actually corresponds to the <code>wextract.exe</code> module, which is used to unpack .cab(Cabinet) files. </p>
   <p>Indeed, a resource entry named <code>CABINET</code> is stored in the <code>.rsrc</code> section of the PE file corresponding to the .cab file to extract, confirmed by it&#39;s MSCF<sup class='md-footnote'><a href='#dfref-footnote-1' name='ref-footnote-1'>1</a></sup> signature.</p>
   <p>In order to access this resource, the functions <code>FindResourceA</code> , <code>LoadResource</code> and <code>LockResource</code> are called. <code>LockResource</code> gets a pointer to the resource in memory.</p>
   <p>For the extraction, <code>FDICopy</code> is called with <code>*MEMCAB</code> as the name of the cabinet file, which presumably indicates that the cab file is actually stored in memory, at the pointer location. All the files are then extracted to the temp directory <code>%LocalAppData%/Temp/IXP00?.TMP</code> where <code>?</code> increases each time the binary is run.</p>
