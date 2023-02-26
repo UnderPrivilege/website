@@ -10,6 +10,14 @@ figure {
     flex-direction: column;
     align-items: center;
 }
+
+h1 {
+	color: #0078D7;
+}
+
+h2 {
+	color: #0078D7;
+}
   
 figcaption {
 	text-align: center;
@@ -22,5 +30,5 @@ a {
 code {
     color: #0078D7;
 	background-color: #f2f2f2;
-	font-size: 18px;
+	font-size: 14px;
 }
